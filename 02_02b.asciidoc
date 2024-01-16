@@ -1,0 +1,228 @@
+== How to Import Data in Python
+
+== Learning Objectives
+
+One of the reasons why Python is such a popular programming language for
+machine learning is because it supports some very powerful and easy to
+use packages which are purpose-built for data analysis. One of these
+packages is the *pandas* package. In this exercise, you will get a brief
+introduction to the pandas package and how to import data using
+functions provided by the pandas package. By the end of this tutorial,
+you will have learned:
+
+* what a pandas Series is
+* what a pandas DataFrame is
+* how to import data from a CSV file
+* how to import data from an Excel file
+
+== The pandas Package
+
+
++*In[1]:*+
+[source, ipython3]
+----
+import pandas as pd
+----
+
+== The pandas Series
+
+
++*In[2]:*+
+[source, ipython3]
+----
+members = ["Brazil", "Russia", "India", "China", "South Africa"]
+brics1 = pd.Series(members)
+brics1
+----
+
+
++*Out[2]:*+
+----0          Brazil
+1          Russia
+2           India
+3           China
+4    South Africa
+dtype: object----
+
+
++*In[3]:*+
+[source, ipython3]
+----
+type(brics1)
+----
+
+
++*Out[3]:*+
+----pandas.core.series.Series----
+
+== The pandas DataFrame
+
+
++*In[4]:*+
+[source, ipython3]
+----
+members = {"country": ["Brazil", "Russia", "India", "China", "South Africa"],
+        "capital": ["Brasilia", "Moscow", "New Delhi", "Beijing", "Pretoria"],
+        "gdp": [2750, 1658, 3202, 15270, 370],
+        "literacy":[.944, .997, .721, .964, .943],
+        "expectancy": [76.8, 72.7, 68.8, 76.4, 63.6],
+        "population": [210.87, 143.96, 1367.09, 1415.05, 57.4]}
+brics2 = pd.DataFrame(members)
+brics2
+----
+
+
++*Out[4]:*+
+----
+[cols=",,,,,,",options="header",]
+|===
+| |country |capital |gdp |literacy |expectancy |population
+|0 |Brazil |Brasilia |2750 |0.944 |76.8 |210.87
+|1 |Russia |Moscow |1658 |0.997 |72.7 |143.96
+|2 |India |New Delhi |3202 |0.721 |68.8 |1367.09
+|3 |China |Beijing |15270 |0.964 |76.4 |1415.05
+|4 |South Africa |Pretoria |370 |0.943 |63.6 |57.40
+|===
+----
+
+
++*In[6]:*+
+[source, ipython3]
+----
+type(brics2)
+----
+
+
++*Out[6]:*+
+----pandas.core.frame.DataFrame----
+
+
++*In[7]:*+
+[source, ipython3]
+----
+members = [["Brazil", "Brasilia", 2750, 0.944, 76.8, 210.87],
+                     ["Russia", "Moscow", 1658, 0.997, 72.7, 143.96],
+                     ["India", "New Delhi", 3202, 0.721, 68.8, 1367.09],
+                     ["China", "Beijing", 15270, 0.964, 76.4, 1415.05],
+                     ["South Africa", "Pretoria", 370, 0.943, 63.6, 57.4]]
+labels = ["country", "capital", "gdp", "literacy", "expectancy", "population"]
+brics3 = pd.DataFrame(members, columns = labels)
+brics3
+
+----
+
+
++*Out[7]:*+
+----
+[cols=",,,,,,",options="header",]
+|===
+| |country |capital |gdp |literacy |expectancy |population
+|0 |Brazil |Brasilia |2750 |0.944 |76.8 |210.87
+|1 |Russia |Moscow |1658 |0.997 |72.7 |143.96
+|2 |India |New Delhi |3202 |0.721 |68.8 |1367.09
+|3 |China |Beijing |15270 |0.964 |76.4 |1415.05
+|4 |South Africa |Pretoria |370 |0.943 |63.6 |57.40
+|===
+----
+
+== How to import data from a CSV file
+
+
++*In[8]:*+
+[source, ipython3]
+----
+brics4 = pd.read_csv("brics.csv")
+brics4
+----
+
+
++*Out[8]:*+
+----
+[cols=",,,,,,",options="header",]
+|===
+| |country |capital |gdp |literacy |expectancy |population
+|0 |Brazil |Brasilia |2750 |0.944 |76.8 |210.87
+|1 |Russia |Moscow |1658 |0.997 |72.7 |143.96
+|2 |India |New Delhi |3202 |0.721 |68.8 |1367.09
+|3 |China |Beijing |15270 |0.964 |76.4 |1415.05
+|4 |South Africa |Pretoria |370 |0.943 |63.6 |57.40
+|===
+----
+
+== How to import data from an Excel file
+
+
++*In[9]:*+
+[source, ipython3]
+----
+brics5 = pd.read_excel("brics.xlsx")
+brics5
+----
+
+
++*Out[9]:*+
+----
+[cols=",,,,,,",options="header",]
+|===
+| |country |capital |gdp |literacy |expectancy |population
+|0 |Brazil |Brasilia |2750 |0.944 |76.8 |210.87
+|1 |Russia |Moscow |1658 |0.997 |72.7 |143.96
+|2 |India |New Delhi |3202 |0.721 |68.8 |1367.09
+|3 |China |Beijing |15270 |0.964 |76.4 |1415.05
+|4 |South Africa |Pretoria |370 |0.943 |63.6 |57.40
+|===
+----
+
+
++*In[11]:*+
+[source, ipython3]
+----
+brics6 = pd.read_excel("brics.xlsx", sheet_name = "Summits")
+brics6
+----
+
+
++*Out[11]:*+
+----
+[cols=",,,,,",options="header",]
+|===
+| |summit |date |host |leader |location
+|0 |1st |June 16th, 2009 |Russia |Dmitry Medvedev |Yekaterinburg
+(Sevastianov's House)
+
+|1 |2nd |April 15th, 2010 |Brazil |Luiz Inácio Lula da Silva |Brasília
+(Itamaraty Palace)
+
+|2 |3rd |April 14th, 2011 |China |Hu Jintao |Sanya (Sheraton Sanya
+Resort)
+
+|3 |4th |March 29th, 2012 |India |Manmohan Singh |New Delhi (Taj Mahal
+Hotel)
+
+|4 |5th |March 26th – 27th, 2013 |South Africa |Jacob Zuma |Durban
+(Durban ICC)
+
+|5 |6th |July 14th – 17th, 2014 |Brazil |Dilma Rousseff |Fortaleza
+(Centro de Eventos do Ceará)
+
+|6 |7th |July 8th – 9th, 2015 |Russia |Vladimir Putin |Ufa (Congress
+Hall)
+
+|7 |8th |October 15th – 16th, 2016 |India |Narendra Modi |Benaulim (Taj
+Exotica)
+
+|8 |9th |September 3th – 5th, 2017 |China |Xi Jinping |Xiamen (Xiamen
+International Conference Center)
+
+|9 |10th |July 25th – 27th, 2018 |South Africa |Cyril Ramaphosa
+|Johannesburg (Sandton Convention Centre)
+
+|10 |11th |November 13th – 14th, 2019 |Brazil |Jair Bolsonaro |Brasília
+(Itamaraty Palace)
+
+|11 |12th |November 17th, 2020 |Russia |Vladimir Putin |Saint Petersburg
+(video conference)
+
+|12 |13th |TBA |India |Narendra Modi |New Delhi
+|===
+----
